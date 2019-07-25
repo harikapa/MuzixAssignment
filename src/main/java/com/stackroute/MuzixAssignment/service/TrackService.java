@@ -18,5 +18,5 @@ public interface TrackService {
 
     public boolean deleteTrack(int id) throws TrackNotFoundException;
 
-    public List<Track> searchTracks(String name, int id);
+    public List<Track> searchTracks(String searchString);
 }

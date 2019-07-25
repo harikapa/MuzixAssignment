@@ -13,7 +13,7 @@ public interface TrackRepository extends JpaRepository<Track,Integer> {
     @Query("SELECT t FROM Track t WHERE name = ?1")
     List<Track> getTrackByName(String name);
 
-    @Query(value = "SELECT t FROM Track t WHERE (?1 is null OR name = ?1) AND (?2 = 0 OR id = ?2)")
-    List<Track> searchTracks(String name, int id);
-
+    //@Query(value = "SELECT t FROM Track t WHERE (?1 is null OR name = ?1) AND (?2 = 0 OR id = ?2)")
+    @Query(value = "SELECT t FROM Track t WHERE name = ?1 OR artist = ?1")
+    List<Track> searchTracks(String searchString);
 }

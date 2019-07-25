@@ -63,7 +63,6 @@ public class TrackServiceImpl implements TrackService{
         track.setId(id);
 
         Track savedTrack = trackRepository.save(track);
-        System.out.println(savedTrack.getComment());
         return savedTrack;
     }
 
@@ -90,10 +89,8 @@ public class TrackServiceImpl implements TrackService{
     }
 
     @Override
-    public List<Track> searchTracks(String name, int id) {
+    public List<Track> searchTracks(String searchString) {
 
-        System.out.println(name);
-        System.out.println(id);
-        return trackRepository.searchTracks(name,id);
+        return trackRepository.searchTracks(searchString);
     }
 }
