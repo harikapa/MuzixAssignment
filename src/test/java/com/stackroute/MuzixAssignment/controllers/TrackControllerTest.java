@@ -3,7 +3,6 @@ package com.stackroute.MuzixAssignment.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.MuzixAssignment.domain.Track;
 import com.stackroute.MuzixAssignment.service.TrackService;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -13,7 +12,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;

@@ -32,16 +32,4 @@ public class Track {
     private String streamable;
 
     private int listeners;
-
-    @Override
-    public String toString() {
-        return "Track{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", artist='" + artist + '\'' +
-                ", url='" + url + '\'' +
-                ", streamable='" + streamable + '\'' +
-                ", listeners=" + listeners +
-                '}';
-    }
 }
