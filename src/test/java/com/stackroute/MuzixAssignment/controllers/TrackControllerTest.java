@@ -71,22 +71,22 @@ public class TrackControllerTest{
         verify(trackService, times(1)).getAllTracks();
         verifyNoMoreInteractions(trackService);
     }
-
-    @Test
-    public void getTracksByNameTest() throws Exception
-    {
-        List<Track> tracks = new ArrayList<>();
-        Track track1 = new Track(1,"premam","harika","www.testurl","FIXME",1233);
-        Track track2 = new Track(2,"ishq","harika","www.testurl","FIXME",1233);
-        tracks.add(track1);
-        when(trackService.getTracksByName("premam")).thenReturn(tracks);
-        mockMvc.perform(get("/trackByName?name=premam")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)));
-        verify(trackService, times(1)).getTracksByName("premam");
-        verifyNoMoreInteractions(trackService);
-    }
+//
+//    @Test
+//    public void getTracksByNameTest() throws Exception
+//    {
+//        List<Track> tracks = new ArrayList<>();
+//        Track track1 = new Track(1,"premam","harika","www.testurl","FIXME",1233);
+//        Track track2 = new Track(2,"ishq","harika","www.testurl","FIXME",1233);
+//        tracks.add(track1);
+//        when(trackService.getTracksByName("premam")).thenReturn(tracks);
+//        mockMvc.perform(get("/trackByName?name=premam")
+//                .contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$", hasSize(1)));
+//        verify(trackService, times(1)).getTracksByName("premam");
+//        verifyNoMoreInteractions(trackService);
+//    }
 
     @Test
     public void updateTrackTest() throws Exception

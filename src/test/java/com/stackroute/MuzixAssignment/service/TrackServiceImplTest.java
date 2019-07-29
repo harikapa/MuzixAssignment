@@ -75,17 +75,17 @@ public class TrackServiceImplTest {
         verifyNoMoreInteractions(trackRepository);
     }
 
-    @Test
-    public void getTracksByNameTest()
-    {
-        List<Track> trackList = new ArrayList<>();
-        trackList.add(track);
-        when(trackRepository.getTrackByName("premam")).thenReturn(trackList);
-        List<Track> retrievedTracks = trackService.getTracksByName("premam");
-        Assert.assertEquals(trackList,retrievedTracks);
-        verify(trackRepository,times(1)).getTrackByName("premam");
-        verifyNoMoreInteractions(trackRepository);
-    }
+//    @Test
+//    public void getTracksByNameTest()
+//    {
+//        List<Track> trackList = new ArrayList<>();
+//        trackList.add(track);
+//        when(trackRepository.getTrackByName("premam")).thenReturn(trackList);
+//        List<Track> retrievedTracks = trackService.getTracksByName("premam");
+//        Assert.assertEquals(trackList,retrievedTracks);
+//        verify(trackRepository,times(1)).getTrackByName("premam");
+//        verifyNoMoreInteractions(trackRepository);
+//    }
 
     @Test
     public void updateServiceTest() throws TrackNotFoundException

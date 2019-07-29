@@ -12,11 +12,11 @@ public interface TrackService {
 
     public List<Track> getAllTracks();
 
-    public List<Track> getTracksByName(String name);
+    //public List<Track> getTracksByName(String name);
 
     public Track updateTrack(Track track, int id) throws TrackNotFoundException;
 
     public boolean deleteTrack(int id) throws TrackNotFoundException;
 
-    public List<Track> searchTracks(String searchString);
+    //public List<Track> searchTracks(String searchString);
 }
