@@ -6,6 +6,7 @@ import com.stackroute.MuzixAssignment.domain.Track;
 import com.stackroute.MuzixAssignment.exceptions.TrackAlreadyExistsException;
 import com.stackroute.MuzixAssignment.exceptions.TrackNotFoundException;
 import com.stackroute.MuzixAssignment.service.TrackService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class TrackController {
     @PostMapping("alltracks")
     public ResponseEntity<?> saveAllTrack(@RequestBody List<Track> trackList) throws TrackAlreadyExistsException
     {
+
         List<Track> savedTrackList = new ArrayList<Track>();
         for (Track track:trackList) {
             Track track1 = trackService.saveTrack(track);
@@ -52,7 +54,7 @@ public class TrackController {
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks() {
         ResponseEntity responseEntity;
-
+        System.out.println("${server.port}");
         try {
             responseEntity = new ResponseEntity<List<Track>>(trackService.getAllTracks(), HttpStatus.OK);
         }
