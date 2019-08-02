@@ -14,14 +14,12 @@ public class WebConfiguration {
     public ServletRegistrationBean servletRegistrationBean()
     {
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new WebServlet());
-        servletRegistrationBean.addUrlMappings("/console/*");
+        servletRegistrationBean.addUrlMappings("/console/*"); //mapping url for h2console
         return servletRegistrationBean;
     }
 
     @EventListener
     public void seed(ContextRefreshedEvent event) {
-
-
 
     }
 }

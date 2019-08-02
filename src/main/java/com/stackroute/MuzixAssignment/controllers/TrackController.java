@@ -36,6 +36,7 @@ public class TrackController {
     public ResponseEntity<?> saveAllTrack(@RequestBody List<Track> trackList) throws TrackAlreadyExistsException
     {
         List<Track> savedTrackList = new ArrayList<Track>();
+        //saving each track
         for (Track track:trackList) {
             Track track1 = trackService.saveTrack(track);
             savedTrackList.add(track1);
@@ -93,10 +94,16 @@ public class TrackController {
     public ResponseEntity<?> getLastFmTracks(@RequestParam String url) throws Exception{
         RestTemplate restTemplate = new RestTemplate();
         String string = restTemplate.getForObject(url,String.class);
+
+        //converting json to java object
         ObjectMapper objectMapper = new ObjectMapper();
         Result result = objectMapper.readValue(string, Result.class);
+
+        //obtain the list of tracks
         List<Track> trackList = result.results.trackmatches.track;
         List<Track> savedTrackList = new ArrayList<>();
+
+        //save each track
         for (Track track:trackList) {
             Track track1 = trackService.saveTrack(track);
             savedTrackList.add(track1);

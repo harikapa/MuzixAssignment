@@ -15,7 +15,7 @@ public class SwaggerConfiguration {
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.stackroute.muzixapp"))
+                .apis(RequestHandlerSelectors.basePackage("com.stackroute.muzixapp")) //to get all the controllers in that package
                 //.paths(regex("/api/v1.*"))
                 .build();
     }
