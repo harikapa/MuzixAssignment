@@ -18,7 +18,7 @@ import java.util.List;
 @ControllerAdvice(basePackages = "com.stackroute.muzixapp")
 public class TrackController {
 
-    TrackService trackService;
+    private TrackService trackService;
 
     public TrackController(TrackService trackService)
     {
@@ -33,7 +33,7 @@ public class TrackController {
     }
 
     @PostMapping("alltracks")
-    public ResponseEntity<?> saveAllTrack(@RequestBody List<Track> trackList) throws TrackAlreadyExistsException
+    public ResponseEntity<?> saveTrack(@RequestBody List<Track> trackList) throws TrackAlreadyExistsException
     {
         List<Track> savedTrackList = new ArrayList<Track>();
         for (Track track:trackList) {
@@ -42,12 +42,6 @@ public class TrackController {
         }
         return new ResponseEntity<List<Track>>(savedTrackList, HttpStatus.CREATED);
     }
-
-//    @GetMapping("trackByName")
-//    public ResponseEntity<?> getTrackByName(@RequestParam String name) throws TrackNotFoundException
-//    {
-//        return new ResponseEntity<List<Track>>(trackService.getTracksByName(name), HttpStatus.OK);
-//    }
 
     @GetMapping("track")
     public ResponseEntity<?> getAllTracks() {
@@ -83,17 +77,12 @@ public class TrackController {
         return responseEntity;
     }
 
-//    @GetMapping("searchTracks")
-//    public ResponseEntity<?> searchTracks(@RequestParam("searchString") String searchString)
-//    {
-//        return new ResponseEntity<>(trackService.searchTracks(searchString),HttpStatus.OK);
-//    }
-
     @GetMapping("getLastFmTracks")
     public ResponseEntity<?> getLastFmTracks(@RequestParam String url) throws Exception{
         RestTemplate restTemplate = new RestTemplate();
         String string = restTemplate.getForObject(url,String.class);
         ObjectMapper objectMapper = new ObjectMapper();
+
         //converting json to java object
         Result result = objectMapper.readValue(string, Result.class);
         List<Track> trackList = result.results.trackmatches.track;

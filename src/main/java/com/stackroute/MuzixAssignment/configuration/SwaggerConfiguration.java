@@ -11,13 +11,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-
     @Bean
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.stackroute.muzixapp")) //controllers path
-                //.paths(regex("/api/v1.*"))
                 .build();
     }
 }
