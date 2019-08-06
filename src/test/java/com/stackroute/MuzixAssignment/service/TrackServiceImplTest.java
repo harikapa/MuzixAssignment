@@ -95,6 +95,7 @@ public class TrackServiceImplTest {
         when(trackRepository.save(track)).thenReturn(track);
         Track updatedTrack = trackService.updateTrack(track,1);
         Assert.assertEquals(track,updatedTrack);
+
         //verify here verifies that userRepository save method is only called once
         verify(trackRepository,times(1)).save(Mockito.any(Track.class));
         verify(trackRepository,times(1)).findById(1);
@@ -106,8 +107,8 @@ public class TrackServiceImplTest {
     {
         Optional<Track> optionalTrack = Optional.of(track);
         when(trackRepository.findById(1)).thenReturn(optionalTrack);
-        Boolean result = trackService.deleteTrack(1);
-        Assert.assertTrue(result);
+        Track result = trackService.deleteTrack(1);
+        Assert.assertNotNull(result);
         //verify here verifies that userRepository save method is only called once
         verify(trackRepository,times(1)).delete(Mockito.any(Track.class));
         verify(trackRepository,times(1)).findById(1);

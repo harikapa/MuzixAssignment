@@ -20,7 +20,6 @@ public class TrackControllerAdvice {
         return new ResponseEntity<>(new VndErrors(logRef, message), httpStatus);
     }
 
-
     //handling exception using exception handler annotation
     @ExceptionHandler(TrackNotFoundException.class)
     public ResponseEntity <VndErrors> notFoundException(final TrackNotFoundException e)

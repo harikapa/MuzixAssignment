@@ -18,16 +18,18 @@ import java.util.List;
 public class TrackRepositoryTest {
 
     @Autowired
-    TrackRepository trackRepository;
+    private TrackRepository trackRepository;
 
-    Track track;
+    private Track track;
 
+    //triggers before every test
     @Before
     public void setUp()
     {
         track = new Track(1,"premam","harika","www.testurl","FIXME",1233);
     }
 
+    //triggers after every test
     @After
     public void tearDown(){
 

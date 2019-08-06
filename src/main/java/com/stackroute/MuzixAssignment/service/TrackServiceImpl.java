@@ -4,17 +4,19 @@ import com.stackroute.MuzixAssignment.domain.Track;
 import com.stackroute.MuzixAssignment.exceptions.TrackAlreadyExistsException;
 import com.stackroute.MuzixAssignment.exceptions.TrackNotFoundException;
 import com.stackroute.MuzixAssignment.repository.TrackRepository;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TrackServiceImpl implements TrackService{
+public class TrackServiceImpl implements TrackService, ApplicationListener<ContextRefreshedEvent> {
 
-    TrackRepository trackRepository;
+    private TrackRepository trackRepository;
 
     @Autowired
     public TrackServiceImpl(TrackRepository trackRepository)
@@ -29,6 +31,7 @@ public class TrackServiceImpl implements TrackService{
         {
             throw new TrackAlreadyExistsException("Track already exists");
         }
+
         Track savedTrack = trackRepository.save(track);
 
         if(savedTrack == null)
@@ -48,7 +51,6 @@ public class TrackServiceImpl implements TrackService{
     public List<Track> getTracksByName(String name) {
 
         return trackRepository.getTrackByName(name);
-
     }
 
     public Track updateTrack(Track track, int id) throws TrackNotFoundException
@@ -62,11 +64,10 @@ public class TrackServiceImpl implements TrackService{
 
         track.setId(id);
 
-        Track savedTrack = trackRepository.save(track);
-        return savedTrack;
+        return trackRepository.save(track);
     }
 
-    public boolean deleteTrack(int id) throws TrackNotFoundException
+    public Track deleteTrack(int id) throws TrackNotFoundException
     {
         Optional<Track> track1 = trackRepository.findById(id);
 
@@ -79,12 +80,12 @@ public class TrackServiceImpl implements TrackService{
 
             trackRepository.delete(track1.get());
 
-            return true;
+            return track1.get();
 
         }
         catch (Exception exception)
         {
-            return false;
+            return null;
         }
     }
 
@@ -92,5 +93,12 @@ public class TrackServiceImpl implements TrackService{
     public List<Track> searchTracks(String searchString) {
 
         return trackRepository.searchTracks(searchString);
+    }
+
+    //Prefill Database
+    @EventListener
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        trackRepository.save(new Track(1,"Rama Rama krsihna Krishna","Ram","youtube","stream",212));
+        trackRepository.save(new Track(1,"Mantra","charmi","youtube","stream",21));
     }
 }

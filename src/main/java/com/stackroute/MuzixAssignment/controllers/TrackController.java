@@ -33,7 +33,7 @@ public class TrackController {
     }
 
     @PostMapping("alltracks")
-    public ResponseEntity<?> saveAllTrack(@RequestBody List<Track> trackList) throws TrackAlreadyExistsException
+    public ResponseEntity<?> saveTrack(@RequestBody List<Track> trackList) throws TrackAlreadyExistsException
     {
         List<Track> savedTrackList = new ArrayList<Track>();
         //saving each track
@@ -77,8 +77,10 @@ public class TrackController {
     {
         ResponseEntity responseEntity = null;
 
-        if(trackService.deleteTrack(id)) {
-            responseEntity = new ResponseEntity<String>("Deleted Successfully", HttpStatus.OK);
+        Track deletedTrack = trackService.deleteTrack(id);
+
+        if(deletedTrack != null) {
+            responseEntity = new ResponseEntity<Track>(deletedTrack, HttpStatus.OK);
         }
 
         return responseEntity;
