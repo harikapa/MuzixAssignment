@@ -12,5 +12,4 @@ public class MuzixAssignmentApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

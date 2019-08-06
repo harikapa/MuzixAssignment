@@ -98,15 +98,14 @@ public class TrackControllerTest{
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(track1)))
                 .andExpect(status().isOk());
-        //verify(trackService, times(2)).updateTrack(Mockito.any(Track.class),1);
         verifyNoMoreInteractions(trackService);
     }
-
 
     @Test
     public void deleteTrackTest() throws Exception
     {
-        when(trackService.deleteTrack(1)).thenReturn(true);
+        Track track = new Track(1,"premam","harika","www.testurl","FIXME",1233);
+        when(trackService.deleteTrack(1)).thenReturn(track);
         mockMvc.perform(delete("/track/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -114,6 +113,7 @@ public class TrackControllerTest{
         verifyNoMoreInteractions(trackService);
     }
 
+    //Converting object to json
     public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
